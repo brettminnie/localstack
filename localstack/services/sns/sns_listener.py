@@ -157,7 +157,7 @@ def make_response(op_name, content=''):
     response = Response()
     if not content:
         content = '<MessageId>%s</MessageId>' % short_uid()
-    response._content = """<{op_name}Response xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+    response._content = """<{op_name}Response xmlns="http://kms.amazonaws.com/doc/2010-03-31/">
         <{op_name}Result>
             {content}
         </{op_name}Result>

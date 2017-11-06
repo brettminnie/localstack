@@ -13,11 +13,11 @@ import pkgutil
 from localstack import constants, config
 from localstack.constants import (ENV_DEV, DEFAULT_REGION, LOCALSTACK_VENV_FOLDER,
     DEFAULT_PORT_S3_BACKEND, DEFAULT_PORT_APIGATEWAY_BACKEND,
-    DEFAULT_PORT_SNS_BACKEND, DEFAULT_PORT_CLOUDFORMATION_BACKEND)
+    DEFAULT_PORT_SNS_BACKEND, DEFAULT_PORT_CLOUDFORMATION_BACKEND, DEFAULT_PORT_KMS_BACKEND)
 from localstack.config import (USE_SSL, PORT_ROUTE53, PORT_S3,
     PORT_FIREHOSE, PORT_LAMBDA, PORT_SNS, PORT_REDSHIFT, PORT_CLOUDWATCH,
     PORT_DYNAMODBSTREAMS, PORT_SES, PORT_ES, PORT_CLOUDFORMATION, PORT_APIGATEWAY,
-    PORT_SSM)
+    PORT_SSM, PORT_KMS)
 from localstack.utils import common, persistence
 from localstack.utils.common import (run, TMP_THREADS, in_ci, run_cmd_safe,
     TIMESTAMP_FORMAT, FuncThread, ShellCommandThread, mkdir)
@@ -191,6 +191,11 @@ def start_lambda(port=PORT_LAMBDA, async=False):
 
 def start_ssm(port=PORT_SSM, async=False):
     return start_moto_server('ssm', port, name='SSM', async=async)
+
+
+def start_kms(port=PORT_KMS, async=False, update_listener=None):
+    return start_moto_server('kms', port, name='KMS', async=async,
+        backend_port=DEFAULT_PORT_KMS_BACKEND, update_listener=update_listener)
 
 
 # ---------------
